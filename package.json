@@ -1,10 +1,12 @@
 {
   "name": "actions-rs-coverage",
-  "version": "1.0.0",
-  "description": "Github action for calculating source based coverage using the llvm backend.",
+  "version": "0.1.0",
+  "description": "Github action for calculating source based coverage using the llvm backend for rust.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf ./dist/* && ncc build src/main.ts --minify && npm run bundle",
+    "watch": "rm -rf ./dist/* && ncc build src/main.ts --watch",
+    "test": "jest -c jest.config.json"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/JulianSchmid/actions-rs-coverage/issues"
   },
-  "homepage": "https://github.com/JulianSchmid/actions-rs-coverage#readme"
+  "homepage": "https://github.com/JulianSchmid/actions-rs-coverage#readme",
+  "dependencies": {
+    "@actions-rs/core": "^0.1.6",
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0"
+  }
 }

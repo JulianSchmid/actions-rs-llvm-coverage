@@ -1,0 +1,10 @@
+name: 'rust-test-source-coverage'
+description: 'Calculate the cargo test source-based coverage using the llvm backend'
+author: 'Julian Schmid'
+inputs:
+  use-cross:
+    description: Use cross instead of cargo
+    default: false
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
