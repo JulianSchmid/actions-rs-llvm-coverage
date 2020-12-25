@@ -13,4 +13,4 @@ jobs:
         toolchain: nightly
         override: true
     - name: cargo test (instrumented)
-      uses: JulianSchmid/actions-rs-coverage@v0.1.0
+      uses: JulianSchmid/actions-rs-coverage@main
