@@ -13,9 +13,31 @@ export async function run(actionInput: input.Input): Promise<void> {
         program = await Cargo.get();
     }
 
-    let args: string[] = ["test"];
+    // build the tests and collect the executable names
+    let args: string[] = [
+        "test",
+        "--tests",
+        "--no-run",
+        "--message-format=json"
+    ];
 
-    await program.call(args);
+    let artifactsJson = '';
+    const options = {
+        listeners: {
+            stdout: (data: Buffer) => {
+                artifactsJson += data.toString();
+            }
+        }
+    };
+
+    // TODO add environment variables for instrumentation
+
+    await program.call(args, options);
+
+    console.log(`The resulted json is: ${artifactsJson}`);
+
+    // TODO decode the artifact paths
+
 }
 
 async function main(): Promise<void> {
