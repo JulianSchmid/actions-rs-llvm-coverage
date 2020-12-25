@@ -1,3 +1,8 @@
+
+pub fn some_func() -> u64 {
+    1
+}
+
 #[cfg(test)]
 mod tests {
     #[test]
