@@ -5,6 +5,11 @@ import * as core from "@actions/core";
 import * as input from "./input";
 import { Cargo, Cross } from "@actions-rs/core";
 
+/*
+function getEnv(): {} {
+    process.env
+}*/
+
 export async function run(actionInput: input.Input): Promise<void> {
     let program;
     if (actionInput.useCross) {
@@ -27,7 +32,8 @@ export async function run(actionInput: input.Input): Promise<void> {
             stdout: (data: Buffer) => {
                 artifactsJson += data.toString();
             }
-        }
+        },
+
     };
 
     // TODO add environment variables for instrumentation
@@ -35,6 +41,7 @@ export async function run(actionInput: input.Input): Promise<void> {
     await program.call(args, options);
 
     console.log(`The resulted json is: ${artifactsJson}`);
+    console.log(`${process.env}`)
 
     // TODO decode the artifact paths
 
