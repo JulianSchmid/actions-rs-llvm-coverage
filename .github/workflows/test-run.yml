@@ -5,7 +5,6 @@ on: [ push, pull_request ]
 jobs:
   test_coverage:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - uses: actions-rs/toolchain@v1.0.6
@@ -16,8 +15,6 @@ jobs:
       with:
         command: install
         toolchain: nightly
-        args: 
-        - cargo-binutils
-        - rustfilt
+        args: cargo-binutils rustfilt
     - name: cargo test coverage (source based)
       uses: ./
