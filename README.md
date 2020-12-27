@@ -1,7 +1,6 @@
 # actions-rs-llvm-coverage
 
-![example workflow name](https://github.com/JulianSchmid/actions-rs-llvm-coverage
-/workflows/Greet%20Everyone/badge.svg)
+![example workflow name](https://github.com/JulianSchmid/actions-rs-llvm-coverage/workflows/test-runs/badge.svg)
 
 This GitHub Action runs the `cargo test` command on a Rust language project and calculates the source based code coverage of the tests.
 
@@ -40,4 +39,6 @@ jobs:
 ## References
 
 * [The Rust Unstable Book: source-based-code-coverage](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/source-based-code-coverage.html)
+* [Rust Blog Post: Source-based code coverage in nightly](https://blog.rust-lang.org/inside-rust/2020/11/12/source-based-code-coverage.html)
+* [`cargo_metadata` crate](https://github.com/oli-obk/cargo_metadata)
 * [Rust Blog Post: Source-based code coverage in nightly](https://blog.rust-lang.org/inside-rust/2020/11/12/source-based-code-coverage.html)
