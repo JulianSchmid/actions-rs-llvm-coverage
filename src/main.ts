@@ -1,4 +1,6 @@
 //import path from "path";
+//import fs from "fs";
+import * as glob from "glob";
 
 import * as core from "@actions/core";
 
@@ -15,9 +17,10 @@ export async function run(actionInput: input.Input): Promise<void> {
     }
 
     // env & args for commands
+    const prefix = "coverage-";
     const env = {
         RUSTFLAGS: "-Zinstrument-coverage",
-        LLVM_PROFILE_FILE: "coverage-%m.profraw",
+        LLVM_PROFILE_FILE: prefix+"%m.profraw",
         ...process.env
     };
 
@@ -31,9 +34,6 @@ export async function run(actionInput: input.Input): Promise<void> {
 
     // run the instrumented tests
     await program.call(test_args, {env: env});
-
-    // merge the coverages from the different runnables
-    // TODO
 
     // collect executable names
     let artifacts: string[] = [];
@@ -66,10 +66,26 @@ export async function run(actionInput: input.Input): Promise<void> {
         options
     );
 
-    console.log(`Identified the following artifacts:`);
+    console.log(`Identified the following executables:`);
     for (let f of artifacts) {
         console.log(`    ${f}`)
     }
+
+    // merge the coverages from the different executables
+    let profraws = glob.sync(prefix+"*.profraw");
+    await program.call(
+        [
+            "profdata",
+            "--",
+            "merge",
+            "-sparse",
+            ...profraws,
+            "-o",
+            "coverage.profdata"
+        ]
+    )
+
+    // TODO
 
     // TODO print coverage summary
 
