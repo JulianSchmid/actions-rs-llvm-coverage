@@ -1,9 +1,9 @@
-name: codecoverage 
+name: test-run
 
 on: [ push, pull_request ]
 
 jobs:
-  codecoverage_test:
+  test_coverage:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,5 +17,5 @@ jobs:
         command: install
         toolchain: nightly
         args: cargo-binutils
-    - name: cargo test (instrumented)
-      uses: JulianSchmid/actions-rs-coverage@main
+    - name: cargo test coverage (source based)
+      uses: ./
