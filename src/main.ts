@@ -1,5 +1,3 @@
-//import path from "path";
-//import fs from "fs";
 import * as glob from "glob";
 
 import * as core from "@actions/core";
@@ -71,23 +69,27 @@ export async function run(actionInput: input.Input): Promise<void> {
         console.log(`    ${f}`)
     }
 
+    // TEST run for debugging
+    await program.call(
+        [
+            "profdata"
+        ],
+        { env: env }
+    );
+
     // merge the coverages from the different executables
-    let profraws = glob.sync("**/"+prefix+"*.profraw");
-    console.log(`Glob: `+ "**/" + prefix + "*.profraw");
-    for (let a of profraws) {
-        console.log("  "+a);
-    }
     await program.call(
         [
             "profdata",
             "--",
             "merge",
-            "-sparse",
-            ...profraws,
+            "--sparse",
+            ...glob.sync("**/"+prefix+"*.profraw"),
             "-o",
-            "coverage.profdata"
-        ]
-    )
+            "summary.profdata"
+        ],
+        { env: env }
+    );
 
     // TODO
 
