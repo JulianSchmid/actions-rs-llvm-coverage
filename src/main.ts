@@ -91,6 +91,7 @@ export async function run(actionInput: input.Input): Promise<void> {
     }
     await program.call(
         [
+            "+nightly",
             "cov",
             "--",
             "report",
