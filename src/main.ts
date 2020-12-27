@@ -72,14 +72,16 @@ export async function run(actionInput: input.Input): Promise<void> {
     // TEST run for debugging
     await program.call(
         [
+            "+nightly",
             "profdata"
         ],
-        { env: env }
+        //{ env: env }
     );
 
     // merge the coverages from the different executables
     await program.call(
         [
+            "+nightly",
             "profdata",
             "--",
             "merge",
@@ -88,7 +90,7 @@ export async function run(actionInput: input.Input): Promise<void> {
             "-o",
             "summary.profdata"
         ],
-        { env: env }
+        //{ env: env }
     );
 
     // TODO
