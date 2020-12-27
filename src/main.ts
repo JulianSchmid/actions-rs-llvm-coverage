@@ -1,10 +1,17 @@
+import * as fs from "fs";
 import * as glob from "glob";
+//import * as util from "util";
+//import * as path from "path";
 
 import * as core from "@actions/core";
+//import { mkdirP } from "@actions/io";
+
+import { Cargo, Cross } from "@actions-rs/core";
 
 import * as input from "./input";
 import * as cargo_message from "../src/cargo_message";
-import { Cargo, Cross } from "@actions-rs/core";
+
+//const openAsync = promisify(fs.open);
 
 export async function run(actionInput: input.Input): Promise<void> {
     let program;
@@ -84,10 +91,13 @@ export async function run(actionInput: input.Input): Promise<void> {
     );
 
     // print coverage summary
-    let object_args = [];
+    let cov_args = [
+        "--ignore-filename-regex='/.cargo/registry'",
+        "--instr-profile=summary.profdata",
+    ];
     for (let f of artifacts) {
-        object_args.push("--object");
-        object_args.push(f)
+        cov_args.push("--object");
+        cov_args.push(f)
     }
     await program.call(
         [
@@ -96,14 +106,34 @@ export async function run(actionInput: input.Input): Promise<void> {
             "--",
             "report",
             "--use-color",
-            "--ignore-filename-regex='/.cargo/registry'",
-            "--instr-profile=summary.profdata",
+            ...cov_args,
             "--summary-only",
-            ...object_args,
         ]
+    );
+
+    // generate file for codecov
+    let codecovOut = fs.createWriteStream("codecov.txt");
+    await program.call(
+        [
+            "+nightly",
+            "cov",
+            "--",
+            "show",
+            ...cov_args,
+            "--Xdemangler=rustfilt",
+        ],
+        {
+            outStream: codecovOut,
+        }
     )
 
-    // TODO generate file for codecov
+    /*cargo cov -- show \
+    --use-color --ignore-filename-regex='/.cargo/registry' \
+    --instr-profile=json5format.profdata \
+    --object target/debug/deps/lib-30768f9c53506dc5 \
+    --object target/debug/deps/json5format-fececd4653271682 \
+    --show-instantiations --show-line-counts-or-regions \
+    --Xdemangler=rustfilt*/
 }
 
 async function main(): Promise<void> {

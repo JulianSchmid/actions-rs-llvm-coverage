@@ -36,6 +36,15 @@ jobs:
 | ------------| :------: | -------------------------------------------------------------------------| ------ | --------|
 | `use-cross` |          | Use [`cross`](https://github.com/rust-embedded/cross) instead of `cargo` | bool   | false   |
 
+## TODO
+
+* Codecov integration
+    * With merged reports
+    * Seperated reports?
+* HTML Report
+* Doctest support
+* Remove cross?
+
 ## References
 
 * [The Rust Unstable Book: source-based-code-coverage](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/source-based-code-coverage.html)

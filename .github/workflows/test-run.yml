@@ -16,6 +16,8 @@ jobs:
       with:
         command: install
         toolchain: nightly
-        args: cargo-binutils
+        args: 
+        - cargo-binutils
+        - rustfilt
     - name: cargo test coverage (source based)
       uses: ./
