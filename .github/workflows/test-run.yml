@@ -23,4 +23,3 @@ jobs:
       with:
         directory: ./target/codecov
         fail_ci_if_error: true
-        verbose: true
