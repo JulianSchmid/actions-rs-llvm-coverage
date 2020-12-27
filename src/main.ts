@@ -83,9 +83,24 @@ export async function run(actionInput: input.Input): Promise<void> {
         ]
     );
 
-    // TODO
-
-    // TODO print coverage summary
+    // print coverage summary
+    let object_args = [];
+    for (let f of artifacts) {
+        object_args.push("--object");
+        object_args.push(f)
+    }
+    await program.call(
+        [
+            "cov",
+            "--",
+            "report",
+            "--use-color",
+            "--ignore-filename-regex='/.cargo/registry'",
+            "--instr-profile=summary.profdata",
+            "--summary-only",
+            ...object_args,
+        ]
+    )
 
     // TODO generate file for codecov
 }
