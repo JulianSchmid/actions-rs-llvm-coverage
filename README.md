@@ -1,6 +1,6 @@
 # actions-rs-llvm-coverage
 
-![example workflow name](https://github.com/JulianSchmid/actions-rs-llvm-coverage/workflows/test-runs/badge.svg)
+![example workflow name](https://github.com/JulianSchmid/actions-rs-llvm-coverage/workflows/test-run/badge.svg)
 
 This GitHub Action runs the `cargo test` command on a Rust language project and calculates the source based code coverage of the tests.
 
