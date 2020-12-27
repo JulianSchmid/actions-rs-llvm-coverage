@@ -1,10 +1,10 @@
 import * as fs from "fs";
 import * as glob from "glob";
 //import * as util from "util";
-//import * as path from "path";
+import * as path from "path";
 
 import * as core from "@actions/core";
-//import { mkdirP } from "@actions/io";
+import { mkdirP } from "@actions/io";
 
 import { Cargo, Cross } from "@actions-rs/core";
 
@@ -112,7 +112,9 @@ export async function run(actionInput: input.Input): Promise<void> {
     );
 
     // generate file for codecov
-    let codecovOut = fs.createWriteStream("codecov.txt");
+    let codecovPath = "target/codecov";
+    mkdirP(codecovPath);
+    let codecovOut = fs.createWriteStream(path.join(codecovPath, "codecov.txt"));
     await program.call(
         [
             "+nightly",
