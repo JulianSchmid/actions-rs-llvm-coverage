@@ -69,15 +69,6 @@ export async function run(actionInput: input.Input): Promise<void> {
         console.log(`    ${f}`)
     }
 
-    // TEST run for debugging
-    await program.call(
-        [
-            "+nightly",
-            "profdata"
-        ],
-        //{ env: env }
-    );
-
     // merge the coverages from the different executables
     await program.call(
         [
@@ -89,8 +80,7 @@ export async function run(actionInput: input.Input): Promise<void> {
             ...glob.sync("**/"+prefix+"*.profraw"),
             "-o",
             "summary.profdata"
-        ],
-        //{ env: env }
+        ]
     );
 
     // TODO
