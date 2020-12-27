@@ -38,6 +38,7 @@ export async function run(actionInput: input.Input): Promise<void> {
     // collect executable names
     let artifacts: string[] = [];
     const options = {
+        silent: true,
         listeners: {
             stdline: (data: string) => {
                 let msg = cargo_message.fromJson(data);
