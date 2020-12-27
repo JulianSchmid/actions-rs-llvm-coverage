@@ -24,6 +24,7 @@ export async function run(actionInput: input.Input): Promise<void> {
     // TODO add doctest support
 
     let test_args: string[] = [
+        "+nightly",
         "test",
         "--tests",
     ];
