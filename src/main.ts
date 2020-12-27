@@ -73,6 +73,10 @@ export async function run(actionInput: input.Input): Promise<void> {
 
     // merge the coverages from the different executables
     let profraws = glob.sync(prefix+"*.profraw");
+    console.log(`Glob: `+ prefix + "*.profraw");
+    for (let a of profraws) {
+        console.log("  "+a);
+    }
     await program.call(
         [
             "profdata",
