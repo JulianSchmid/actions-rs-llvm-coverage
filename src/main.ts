@@ -122,7 +122,7 @@ export async function run(actionInput: input.Input): Promise<void> {
             "--",
             "export",
             ...cov_args,
-            "--format=text",
+            "--format=lcov",
             "--Xdemangler=rustfilt",
         ],
         {
