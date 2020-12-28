@@ -1,3 +1,4 @@
+# :warning: :warning: This project is not ready to be used :warning: :warning:
 # actions-rs-llvm-coverage
 
 ![example workflow name](https://github.com/JulianSchmid/actions-rs-llvm-coverage/workflows/test-run/badge.svg)
