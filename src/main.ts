@@ -120,8 +120,9 @@ export async function run(actionInput: input.Input): Promise<void> {
             "+nightly",
             "cov",
             "--",
-            "show",
+            "export",
             ...cov_args,
+            "--format=lcov",
             "--Xdemangler=rustfilt",
         ],
         {
