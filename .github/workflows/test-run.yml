@@ -20,6 +20,8 @@ jobs:
         args: cargo-binutils rustfilt
     - name: cargo test coverage (source based)
       uses: ./
+    - name: Cat codecov report
+      run: cat target/codecov/codecov.txt
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
