@@ -114,7 +114,7 @@ export async function run(actionInput: input.Input): Promise<void> {
     // generate file for codecov
     let codecovPath = "target/codecov";
     mkdirP(codecovPath);
-    let codecovOut = fs.createWriteStream(path.join(codecovPath, "codecov.txt"));
+    let codecovOut = fs.createWriteStream(path.join(codecovPath, "codecov.json"));
     await program.call(
         [
             "+nightly",
@@ -122,7 +122,7 @@ export async function run(actionInput: input.Input): Promise<void> {
             "--",
             "export",
             ...cov_args,
-            "--format=lcov",
+            "--format=text",
             "--Xdemangler=rustfilt",
         ],
         {
